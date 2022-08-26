@@ -73,6 +73,7 @@
       <h2>Quizz</h2>
         <div class="container-lg">
           <div class="quizz-content d-flex justify-content-center flex-wrap">
+
             <div class="card marvel-card" style="width: 18rem;">
               <div class="card-img">
                 <img src="./img/marvel-card-1.jpg" class="img-fluid" alt="Marvel heroes">
@@ -82,36 +83,12 @@
                 <p></p>
               </div>
               <div class="card-body">
-                <h5 class="card-title text-center">Quizz Marvel</h5>
-                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+                <h5 class="card-title text-center"></h5>
+                <p class="card-text"></p>
               </div>
               <div class="card-footer d-flex justify-content-between">
-                <p class="card-volume">20 questions</p>
-                <p href="#" class="card-level">Niveau facile</p>
-              </div>
-              <!-- Button for displaying the popup -->
-              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#popup">Lançer le quizz</button>
-              </div>
-              <!-- Popup -->
-              <div id="popup" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <div class="modal-logo">
-                        <img class="img-fluid" src="./img/logo-kwiz974.png" alt="Logo popup">
-                      </div>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-secondary btn-sm" title="It's time to play !">Lançer le quizz</button>
-                    </div>
-                  </div>
-                </div>
+                <p class="card-volume"></p>
+                <p href="#" class="card-level"></p>
               </div>
             </div>
 
@@ -124,12 +101,12 @@
                 <p></p>
               </div>
               <div class="card-body">
-                <h5 class="card-title text-center">Quizz Marvel</h5>
-                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+                <h5 class="card-title text-center"></h5>
+                <p class="card-text"></p>
               </div>
               <div class="card-footer d-flex justify-content-between">
-                <p class="card-volume">20 questions</p>
-                <p href="#" class="card-level">Niveau facile</p>
+                <p class="card-volume"></p>
+                <p href="#" class="card-level"></p>
               </div>
             </div>
 
@@ -140,12 +117,12 @@
                 <p></p>
               </div>
               <div class="card-body">
-                <h5 class="card-title text-center">Quizz Marvel</h5>
-                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+                <h5 class="card-title text-center"></h5>
+                <p class="card-text"></p>
               </div>
               <div class="card-footer d-flex justify-content-between">
-                <p class="card-volume">20 questions</p>
-                <p href="#" class="card-level">Niveau facile</p>
+                <p class="card-volume"></p>
+                <p href="#" class="card-level"></p>
               </div>
             </div>
 
@@ -194,6 +171,38 @@
                 <p href="#" class="card-level">Niveau facile</p>
               </div>
             </div>
+
+            <!-- Popup -->
+            <div id="popup-quizz" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-modal="true"">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <div class="modal-logo">
+                      <img class="img-fluid" src="./img/logo-kwiz974.png" alt="Logo popup">
+                    </div>
+                    <button type="button" class="btn-close" aria-label="Close" onclick="managePopup('popup-quizz', 'none', 0)"></button>
+                  </div>
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                    <div class="bar left-bar">
+                      <p>20 questions</p>
+                    </div>
+                    <div class="bar right-bar">
+                      <p>Niveau expert</p>
+                    </div>
+
+
+
+                  </div>
+                  <!-- Modal Footer -->
+                  <div class="modal-footer d-flex justify-content-center">
+                      <button type="button" class="btn btn-secondary btn-sm" title="It's time to play !">Lançer le quizz</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
 
           </div>
         </div>

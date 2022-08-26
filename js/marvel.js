@@ -1,4 +1,4 @@
-// Adresse du fichier de données json
+// Global variables
 let url ="./json/marvel.json";
 
 const getData = async function (pathFile) {
@@ -7,80 +7,79 @@ const getData = async function (pathFile) {
     // File is correctly found (Server status 200)
     if (response.ok) {
         let data = await response.json();
-        fillCard(data);
+        callTreatment(data);
     } else {
         // File not found : return a 404 error from the server
         console.error('Retour du serveur :', response.status)
     }
 }
 
-function fillCard(dataCard) {
+// Function for managing the popup window
+// Opacity status ==> 0 : Hidden / 1 : Visible
+function managePopup(modalWindow, displayMode, displayStatus) {
 
-    const marvelCards = document.querySelectorAll('.marvel-card');
-
-    for (i=0; i < marvelCards.length; i++) {
-        const nbreQuestions = marvelCards[i].querySelector('.card-body p');
-        const levelCard = marvelCards[i].querySelector('.card-link');
-        marvelCards[i].querySelector('.card-header').lastElementChild.textContent=dataCard['catégorie-nom-slogan'].fr['catégorie'];
-        marvelCards[i].querySelector('.card-title').textContent=dataCard['catégorie-nom-slogan'].fr.nom;
-        marvelCards[i].querySelector('.card-text').textContent=dataCard['catégorie-nom-slogan'].fr.slogan;
-    }
-
-    console.log(dataCard.quizz.fr)
+    document.getElementById('backdrop').style.display = displayMode;
+    document.getElementById(modalWindow).style.display = displayMode;
+    (displayStatus == 0) ? document.getElementById(modalWindow).style.opacity = 0 : document.getElementById(modalWindow).style.opacity = 1;
 
 }
 
+function initModalPopup() {
 
+    const quizzCards = document.querySelectorAll('.card');
+
+    // When the user clicks on a card, open the modal popup
+    quizzCards.forEach(card => {
+
+        card.addEventListener('click', () => {
+
+            card.classList.add('selected');
+            managePopup('popup-quizz', 'block', 1 );
+
+        });
+
+    });
+
+}
+// Fill data for the header and body HTML elements in each card
+function fillCard_HB (dataHBCard, listeCards) {
+
+    for (i=0; i < listeCards.length; i++) {
+
+        listeCards[i].querySelector('.card-header').lastElementChild.textContent=dataHBCard['catégorie-nom-slogan'].fr['catégorie'];
+        listeCards[i].querySelector('.card-title').textContent=dataHBCard['catégorie-nom-slogan'].fr.nom;
+        listeCards[i].querySelector('.card-text').textContent=dataHBCard['catégorie-nom-slogan'].fr.slogan;
+    }
+
+}
+
+// Fill data for the footer HTML elements in each card
+function fillCard_F (dataCardFooter, listeCards) {
+
+    let j=0;
+
+    Object.keys(dataCardFooter.quizz.fr).forEach(level => {
+        listeCards[j].querySelector('.card-level').textContent='Niveau ' + level;
+        listeCards[j].querySelector('.card-volume').textContent=(Object.keys((dataCardFooter.quizz.fr)[level]).length) + ' questions';
+        j++;
+    });
+
+}
+
+// General operations
+function callTreatment(dataCard) {
+
+    // Declare some local variables
+    const lstCards = document.querySelectorAll('.marvel-card');
+
+    initModalPopup();
+    fillCard_HB(dataCard, lstCards);
+    fillCard_F(dataCard, lstCards);
+
+}
 
 // Get data from JSON file;
 getData(url);
-
-
-
-// const marvelCards = document.querySelectorAll('.marvel-card');
-
-// for (i=0; i < marvelCards.length; i++) {
-    // marvelCards[i].querySelector('.card-header').lastElementChild.textContent=myData;
-// }
-
-// for (i=0; i < marvelCards.length; i++) {
-//     const nbreQuestions = marvelCards[i].querySelector('.card-body p');
-//     // const levelCard = marvelCards[i].querySelector('.card-link');
-//     marvelCards[i].querySelector('.card-header').lastElementChild.textContent=data['catégorie-nom-slogan'].fr['catégorie'];
-//     marvelCards[i].querySelector('.card-title').textContent=data['catégorie-nom-slogan'].fr.nom;
-//     marvelCards[i].querySelector('.card-text').textContent=data['catégorie-nom-slogan'].fr.slogan;
-// }
-
-
-// // Déclaration d'un objet associé à la méthode fetch
-// fetch(url)
-//     .then(response => response.json()
-//     .then(data => {
-//         // console.log(data.quizz.fr);
-
-        // const marvelCards = document.querySelectorAll('.marvel-card');
-
-        // for (i=0; i < marvelCards.length; i++) {
-        //     const nbreQuestions = marvelCards[i].querySelector('.card-body p');
-        //     const levelCard = marvelCards[i].querySelector('.card-link');
-        //     marvelCards[i].querySelector('.card-header').lastElementChild.textContent=data['catégorie-nom-slogan'].fr['catégorie'];
-        //     marvelCards[i].querySelector('.card-title').textContent=data['catégorie-nom-slogan'].fr.nom;
-        //     marvelCards[i].querySelector('.card-text').textContent=data['catégorie-nom-slogan'].fr.slogan;
-        // }
-
-
-
-    // console.log(data.quizz.fr['débutant'].length)
-
-    // for (let levelCard in data.quizz.fr) {
-    //     console.log(levelCard);
-    //     // console.log(niveau.length);
-    // }
-
-
-
-
-
 
 
 
