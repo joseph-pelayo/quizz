@@ -5,153 +5,202 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Quizz</title>
 </head>
 <body>
-    <header class="header-section">
-            <nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
-                <div class="container-lg">
+  <header class="header-section">
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
+      <div class="container-lg">
+        <a href="#" class="navbar-brand">
+            <img src="./img/logo-kwiz974.png" alt="Logo site" width="20%">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Culture Générale
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Culture générale</a></li>
+                <li><a class="dropdown-item" href="#">Histoire</a></li>
+                <li><a class="dropdown-item" href="#">Géographie</a></li>
+                <li><a class="dropdown-item" href="#">Sciences</a></li>
+                <li><a class="dropdown-item" href="#">Langue française</a></li>
+                <li><a class="dropdown-item" href="#">Langues étrangères</a></li>
+                <li><a class="dropdown-item" href="#">Enfants</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Divertissements
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Célébrités et people</a></li>
+                <li><a class="dropdown-item" href="#">Cinéma</a></li>
+                <li><a class="dropdown-item" href="#">Dessins animés</a></li>
+                <li><a class="dropdown-item" href="#">Musique</a></li>
+                <li><a class="dropdown-item" href="#">Télévision</a></li>
+                <li><a class="dropdown-item" href="#">Jeux vidéo</a></li>
+                <li><a class="dropdown-item" href="#">Manga</a></li>
+                <li><a class="dropdown-item" href="#">Bandes dessinés</a></li>
+                <li><a class="dropdown-item" href="#">Humour</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Sports et loisirs
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Auto-moto</a></li>
+                <li><a class="dropdown-item" href="#">Cuisine</a></li>
+                <li><a class="dropdown-item" href="#">Loisirs</a></li>
+                <li><a class="dropdown-item" href="#">Sport</a></li>
+                <li><a class="dropdown-item" href="#">Voyages</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-                    <a href="#" class="navbar-brand">
-                        <img src="./img/logo-kwiz974.png" alt="Logo site" width="20%">
-                    </a>
-
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Culture Générale
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Culture générale</a></li>
-                              <li><a class="dropdown-item" href="#">Histoire</a></li>
-                              <li><a class="dropdown-item" href="#">Géographie</a></li>
-                              <li><a class="dropdown-item" href="#">Sciences</a></li>
-                              <li><a class="dropdown-item" href="#">Langue française</a></li>
-                              <li><a class="dropdown-item" href="#">Langues étrangères</a></li>
-                              <li><a class="dropdown-item" href="#">Enfants</a></li>
-                            </ul>
-                          </li>
-
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Divertissements
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Célébrités et people</a></li>
-                              <li><a class="dropdown-item" href="#">Cinéma</a></li>
-                              <li><a class="dropdown-item" href="#">Dessins animés</a></li>
-                              <li><a class="dropdown-item" href="#">Musique</a></li>
-                              <li><a class="dropdown-item" href="#">Télévision</a></li>
-                              <li><a class="dropdown-item" href="#">Jeux vidéo</a></li>
-                              <li><a class="dropdown-item" href="#">Manga</a></li>
-                              <li><a class="dropdown-item" href="#">Bandes dessinés</a></li>
-                              <li><a class="dropdown-item" href="#">Humour</a></li>
-                            </ul>
-                          </li>
-
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Sports et loisirs
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Auto-moto</a></li>
-                              <li><a class="dropdown-item" href="#">Cuisine</a></li>
-                              <li><a class="dropdown-item" href="#">Loisirs</a></li>
-                              <li><a class="dropdown-item" href="#">Sport</a></li>
-                              <li><a class="dropdown-item" href="#">Voyages</a></li>
-                            </ul>
-                          </li>
-
-                        </ul>
+  <main>
+    <section class="quizz">
+      <h2>Quizz</h2>
+        <div class="container-lg">
+          <div class="quizz-content d-flex justify-content-center flex-wrap">
+            <div class="card marvel-card" style="width: 18rem;">
+              <div class="card-img">
+                <img src="./img/marvel-card-1.jpg" class="img-fluid" alt="Marvel heroes">
+              </div>
+              <div class="card-header text-center">
+                <p>Divertissement</p>
+                <p></p>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">Quizz Marvel</h5>
+                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                <p class="card-volume">20 questions</p>
+                <p href="#" class="card-level">Niveau facile</p>
+              </div>
+              <!-- Button for displaying the popup -->
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#popup">Lançer le quizz</button>
+              </div>
+              <!-- Popup -->
+              <div id="popup" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <div class="modal-logo">
+                        <img class="img-fluid" src="./img/logo-kwiz974.png" alt="Logo popup">
+                      </div>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
 
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary btn-sm" title="It's time to play !">Lançer le quizz</button>
+                    </div>
+                  </div>
                 </div>
-            </nav>
-    </header>
-
-    <main>
-        <section class="quizz-populaire">
-            <div class="container-lg">
-                <h2>Quizz populaires</h2>
-                <div class="row">
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="./img/marvel-card.jpg" class="card-img-top" alt="...">
-                            <div class="card-header text-center">
-                              <p>Divertissement</p>
-                              <p>Cinéma</p>
-                            </div>
-                            <div class="card-body">
-                              <h5 class="card-title text-center">Quizz Marvel</h5>
-                              <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
-                            </div>
-                            <div class="card-body">
-                              <p>20 questions</p>
-                              <a href="#" class="card-link">Niveau facile</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="./img/histoire-france-card.jpg" class="card-img-top" alt="...">
-                            <div class="card-header text-center">
-                                <p>Culture</p>
-                                <p>Histoire</p>
-                            </div>
-                            <div class="card-body">
-                              <h5 class="card-title text-center">Quizz Histoire de France</h5>
-                              <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
-                            </div>
-                            <div class="card-body">
-                              <p>20 questions</p>
-                              <a href="#" class="card-link">Niveau facile</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="./assets/img/marvel-card.jpg" class="card-img-top" alt="...">
-                            <div class="card-header text-center">
-                                Cinéma
-                            </div>
-                            <div class="card-body">
-                              <h5 class="card-title text-center">Quizz Marvel</h5>
-                              <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
-                            </div>
-                            <div class="card-body">
-                              <p>20 questions</p>
-                              <a href="#" class="card-link">Niveau facile</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="./assets/img/marvel-card.jpg" class="card-img-top" alt="...">
-                            <div class="card-header text-center">
-                                Cinéma
-                            </div>
-                            <div class="card-body">
-                              <h5 class="card-title text-center">Quizz Marvel</h5>
-                              <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
-                            </div>
-                            <div class="card-body">
-                              <p>20 questions</p>
-                              <a href="#" class="card-link">Niveau facile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-        </section>
-    </main>
+
+            <div class="card marvel-card" style="width: 18rem;">
+              <div class="card-img">
+                <img src="./img/marvel-card-2.jpg" class="img-fluid" alt="Marvel heroes">
+              </div>
+              <div class="card-header text-center">
+                <p>Divertissement</p>
+                <p></p>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">Quizz Marvel</h5>
+                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                <p class="card-volume">20 questions</p>
+                <p href="#" class="card-level">Niveau facile</p>
+              </div>
+            </div>
+
+            <div class="card marvel-card" style="width: 18rem;">
+              <img src="./img/marvel-card-3.jpg" class="card-img-top" alt="Marvel heroes">
+              <div class="card-header text-center">
+                <p>Divertissement</p>
+                <p></p>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">Quizz Marvel</h5>
+                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                <p class="card-volume">20 questions</p>
+                <p href="#" class="card-level">Niveau facile</p>
+              </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+              <img src="./img/histoire-france-card.jpg" class="card-img-top" alt="...">
+              <div class="card-header text-center">
+                  <p>Culture</p>
+                  <p>Histoire</p>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">Histoire de France</h5>
+                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                <p class="card-volume">20 questions</p>
+                <p href="#" class="card-level">Niveau facile</p>
+              </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+              <img src="./img/marvel-card.jpg" class="card-img-top" alt="...">
+              <div class="card-header text-center">
+                  Cinéma
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">Quizz Marvel</h5>
+                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                <p class="card-volume">20 questions</p>
+                <p href="#" class="card-level">Niveau facile</p>
+              </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+              <img src="./img/marvel-card.jpg" class="card-img-top" alt="...">
+              <div class="card-header text-center">
+                  Cinéma
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">Quizz Marvel</h5>
+                <p class="card-text">Testez vos connaissances sur les super-héros du monde de Marvel.</p>
+              </div>
+              <div class="card-footer d-flex justify-content-between">
+                <p class="card-volume">20 questions</p>
+                <p href="#" class="card-level">Niveau facile</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+    </section>
+  </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/marvel.js"></script>
 </body>
 </html>
