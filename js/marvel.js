@@ -1,6 +1,9 @@
 // Global variables
 let url = ["./json/marvel.json","./json/automobile.json","./json/fourmis.json","./json/histoire-de-france.json"];
 
+const imagePath = "../img/";
+const extensionImage = ".jpg";
+
 
 /* ========================================================================== */
 /* ================================ FUNCTIONS =============================== */
@@ -64,6 +67,9 @@ function removeClass(strClass) {
 }
 
 
+
+
+
 // Function for managing the popup window
 // Opacity status ==> 0 : Hidden / 1 : Visible
 function displayPopup(modalWindow, displayMode, displayStatus) {
@@ -80,6 +86,19 @@ function displayPopup(modalWindow, displayMode, displayStatus) {
 
 }
 
+function getDataAttributes(selectedCard) {
+
+    const popup = document.getElementById('popup-quizz');
+
+    let urlImage = imagePath + selectedCard.dataset.cardImage + extensionImage;
+    popup.querySelector('.modal-content').style.backgroundImage = `url(${urlImage})`;
+    popup.querySelector('.modal-domain span').textContent = selectedCard.dataset.cardDomain;
+    popup.querySelector('.modal-header p').textContent = selectedCard.dataset.cardCategory;
+    popup.querySelector('.modal-body p').textContent = selectedCard.dataset.cardName;
+    popup.querySelector('.left-bar p').textContent = `${selectedCard.dataset.cardVolume} questions`;
+    popup.querySelector('.right-bar p').textContent = `Niveau ${selectedCard.dataset.cardLevel}`;
+
+}
 
 function defineClickListenerOnCard() {
 
@@ -92,7 +111,8 @@ function defineClickListenerOnCard() {
         card.addEventListener('click', () => {
 
             // card.classList.toggle("selected");
-            card.classList.add("selected")
+            card.classList.add('selected');
+            getDataAttributes(card);
             displayPopup('popup-quizz', 'block', true );
 
         });
@@ -135,10 +155,21 @@ async function getData(pathFile) {
 /* ========================================================================== */
 
 // Begin
-url.forEach(url => {
-    getData(url)
-})
+// Call the function when the whole DOM content is loaded
+document.addEventListener("DOMContentLoaded", () => {
 
+    url.forEach(url => {
+        getData(url)
+    })
+    
+});
+
+// Call the function when the whole DOM content is loaded
+// document.addEventListener("DOMContentLoaded", () => {
+
+//     getData(url[0]);
+
+// });
 
 
 
