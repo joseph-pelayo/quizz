@@ -1,22 +1,56 @@
 // Global variables
-let url ="./json/marvel.json";
+let url = ["./json/marvel.json","./json/automobile.json","./json/fourmis.json","./json/histoire-de-france.json"];
 
-const getData = async function (pathFile) {
-    // Fetching a JSON file
-    let response = await fetch(pathFile);
-    // File is correctly found (Server status 200)
-    if (response.ok) {
-        let data = await response.json();
-        callTreatment(data);
-    } else {
-        // File not found : return a 404 error from the server
-        console.error('Retour du serveur :', response.status)
+
+/* ========================================================================== */
+/* ================================ FUNCTIONS =============================== */
+/* ========================================================================== */
+
+
+function fillCard(dataQuizz) {
+
+    let quizzCards;
+    let j = 0;
+    let levelQuizz = dataQuizz.quizz.fr;
+
+    // Filter cards according to the theme contents
+    switch (dataQuizz['catégorie-nom-slogan'].fr.nom) {
+
+        case 'Héros Marvel':
+            quizzCards = document.querySelectorAll('.card.marvel-card');
+            break;
+        case 'Automobile':
+            quizzCards = document.querySelectorAll('.automotive-card');
+            break;
+        case 'Fourmis':
+            quizzCards = document.querySelectorAll('.ants-card');
+            break;
+        default:
+            quizzCards = document.querySelectorAll('.history-card');
     }
+
+    // Fill data for the header and body HTML elements in each card
+    for (i=0; i < quizzCards.length; i++) {
+
+        quizzCards[i].querySelector('.card-header').lastElementChild.textContent = dataQuizz['catégorie-nom-slogan'].fr['catégorie'];
+        quizzCards[i].querySelector('.card-title').textContent = dataQuizz['catégorie-nom-slogan'].fr.nom;
+        quizzCards[i].querySelector('.card-text').textContent = dataQuizz['catégorie-nom-slogan'].fr.slogan;
+    }
+
+    // Fill data for the footer HTML elements in each card
+    Object.keys(levelQuizz).forEach(level => {
+
+        quizzCards[j].querySelector('.card-level').textContent = `Niveau ${level}`;
+        quizzCards[j].querySelector('.card-volume').textContent = `${levelQuizz[level].length} questions`;
+        j++;
+        
+    });
+
 }
 
 // Function for managing the popup window
 // Opacity status ==> 0 : Hidden / 1 : Visible
-function managePopup(modalWindow, displayMode, displayStatus) {
+function displayPopup(modalWindow, displayMode, displayStatus) {
 
     document.getElementById('backdrop').style.display = displayMode;
     document.getElementById(modalWindow).style.display = displayMode;
@@ -24,7 +58,8 @@ function managePopup(modalWindow, displayMode, displayStatus) {
 
 }
 
-function initModalPopup() {
+
+function defineClickListenerOnCard() {
 
     const quizzCards = document.querySelectorAll('.card');
 
@@ -33,53 +68,53 @@ function initModalPopup() {
 
         card.addEventListener('click', () => {
 
-            card.classList.add('selected');
-            managePopup('popup-quizz', 'block', 1 );
+            displayPopup('popup-quizz', 'block', 1 );
 
         });
 
     });
 
 }
-// Fill data for the header and body HTML elements in each card
-function fillCard_HB (dataHBCard, listeCards) {
 
-    for (i=0; i < listeCards.length; i++) {
 
-        listeCards[i].querySelector('.card-header').lastElementChild.textContent=dataHBCard['catégorie-nom-slogan'].fr['catégorie'];
-        listeCards[i].querySelector('.card-title').textContent=dataHBCard['catégorie-nom-slogan'].fr.nom;
-        listeCards[i].querySelector('.card-text').textContent=dataHBCard['catégorie-nom-slogan'].fr.slogan;
+function main(dataQuizz) {
+    
+    defineClickListenerOnCard();
+
+    fillCard(dataQuizz);
+
+}
+
+
+async function getData(pathFile) {
+
+    // fetching a JSON file
+    const response = await fetch(pathFile);
+
+    if (response.ok) {
+
+        // File is correctly found (Server status == 200)
+        const data = await response.json();
+        main(data);
+
+    } else {
+
+        // File not found : return a 404 error from the server
+        console.error('Retour du serveur :', response.status)
+
     }
-
 }
 
-// Fill data for the footer HTML elements in each card
-function fillCard_F (dataCardFooter, listeCards) {
+/* ========================================================================== */
+/* =========================== END FUNCTIONS ================================ */
+/* ========================================================================== */
 
-    let j=0;
+// Begin
+url.forEach(url => {
+    getData(url)
+})
 
-    Object.keys(dataCardFooter.quizz.fr).forEach(level => {
-        listeCards[j].querySelector('.card-level').textContent='Niveau ' + level;
-        listeCards[j].querySelector('.card-volume').textContent=(Object.keys((dataCardFooter.quizz.fr)[level]).length) + ' questions';
-        j++;
-    });
 
-}
-
-// General operations
-function callTreatment(dataCard) {
-
-    // Declare some local variables
-    const lstCards = document.querySelectorAll('.marvel-card');
-
-    initModalPopup();
-    fillCard_HB(dataCard, lstCards);
-    fillCard_F(dataCard, lstCards);
-
-}
-
-// Get data from JSON file;
-getData(url);
 
 
 

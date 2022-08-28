@@ -24,6 +24,7 @@ body {
 }
 
 .card {
+    width: 18rem;
     box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 
@@ -110,6 +111,9 @@ body {
 .modal-header {
     position: relative;
     margin-bottom: 80px;
+    border: 0;
+    background-color: rgba(47, 54, 64, 0.5);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .modal-logo {
@@ -125,25 +129,31 @@ body {
     right: 20px;
     top: 20px;
     margin: 0;
-    border: 2px solid #1e272e;
+    border: 2px solid #fff;
+    opacity: 1;
+    color: #fff;
 }
 
 .modal-body {
     padding: 0;
     width: 45%;
+    /* height: 480px; */
 }
 
-
+.bar {
+    width: 300px;
+    height: 60px;
+    margin: 40px 0;
+}
 
 .left-bar {
-    background-color: #0097e6;
+    background-color: rgba(0, 151, 230, 0.6);
     border-radius: 0 10px 10px 0;
-    /* transform: translateX(-100%);
-    opacity: 0; */
 }
 
 .right-bar {
-    background-color: #273c75;
+    background-color: rgba(39, 60, 117, 0.7);
+    /* transform: translateX(120%); */
 }
 
 .bar p{
@@ -154,9 +164,11 @@ body {
     color: #fff;
 }
 
-/* .modal-footer {
-    margin-top: 40px;
-} */
+.modal-footer {
+    border: 0;
+    background-color: rgba(47, 54, 64, 0.5);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
 
 .modal-footer .btn {
     border-color: #fff;
