@@ -6,31 +6,37 @@
   "mise-à-jour": "2022-05-02",
   "catégorie-nom-slogan": {
     "fr": {
+      "domaine": "Culture",
       "catégorie": "Histoire",
       "nom": "Histoire de France",
       "slogan": "Paris vaut bien une messe"
     },
     "en": {
+      "domaine": "Culture",
       "catégorie": "History",
       "nom": "History of France",
       "slogan": "Paris is worth a mass"
     },
     "es": {
+      "domaine": "Cultura",
       "catégorie": "Historia",
       "nom": "Historia de Francia",
       "slogan": "París vale una misa"
     },
     "it": {
+      "domaine": "Cultura",
       "catégorie": "Storia",
       "nom": "Storia della Francia",
       "slogan": "Parigi vale una messa"
     },
     "de": {
+      "domaine": "Kultur",
       "catégorie": "Geschichte",
       "nom": "Geschichte Frankreichs",
       "slogan": "Paris ist eine Messe wert"
     },
     "nl": {
+      "domaine": "Cultuur",
       "catégorie": "Geschiedenis",
       "nom": "Geschiedenis van Frankrijk",
       "slogan": "Parijs is een mis waard"

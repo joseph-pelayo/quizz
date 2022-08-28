@@ -6,31 +6,37 @@
   "mise-à-jour": "2022-04-29",
   "catégorie-nom-slogan": {
     "fr": {
+      "domaine": "Nature",
       "catégorie": "Animaux",
       "nom": "Fourmis",
       "slogan": "Insectes aux particularités fascinantes"
     },
     "en": {
+      "domaine": "Nature",
       "catégorie": "Animals",
       "nom": "Ants",
       "slogan": "Insects with Fascinating Peculiarities"
     },
     "es": {
+      "domaine": "Naturaleza",
       "catégorie": "Animales",
       "nom": "Hormigas",
       "slogan": "Insectos con fascinantes peculiaridades"
     },
     "it": {
+      "domaine": "Natura",
       "catégorie": "Animali",
       "nom": "Formiche",
       "slogan": "Insetti dalle affascinanti particolarità"
     },
     "de": {
+      "domaine": "Natur",
       "catégorie": "Tiere",
       "nom": "Ameisen",
       "slogan": "Insekten mit faszinierenden Besonderheiten"
     },
     "nl": {
+      "domaine": "Natuur",
       "catégorie": "Dieren",
       "nom": "Mieren",
       "slogan": "Insecten met fascinerende eigenaardigheden"

@@ -6,31 +6,37 @@
   "mise-à-jour": "2021-02-14",
   "catégorie-nom-slogan": {
     "fr": {
+      "domaine": "Divertissement",
       "catégorie": "Cinéma",
       "nom": "Héros Marvel",
       "slogan": "Des super-héros qui nous fascinent"
     },
     "en": {
+      "domaine": "Entertainment",
       "catégorie": "Cinema",
       "nom": "Marvel Heroes",
       "slogan": "Superheroes that fascinate us"
     },
     "es": {
+      "domaine": "Entretenimiento",
       "catégorie": "Cine",
       "nom": "Héroes de Marvel",
       "slogan": "Superhéroes que nos fascinan"
     },
     "it": {
+      "domaine": "Intrattenimento",
       "catégorie": "Cinema",
       "nom": "Eroi Marvel",
       "slogan": "I supereroi che ci affascinano"
     },
     "de": {
+      "domaine": "Entertainment",
       "catégorie": "Kino",
       "nom": "Marvel-Helden",
       "slogan": "Superhelden, die uns faszinieren"
     },
     "nl": {
+      "domaine": "Amusement",
       "catégorie": "Bioscoop",
       "nom": "Marvel Helden",
       "slogan": "Superhelden die ons fascineren"

@@ -6,31 +6,37 @@
   "mise-à-jour": "2022-04-29",
   "catégorie-nom-slogan": {
     "fr": {
+      "domaine": "Culture",
       "catégorie": "Culture générale",
       "nom": "Automobile",
       "slogan": "Jouez à plus de 300 à l'heure"
     },
     "en": {
+      "domaine": "Culture",
       "catégorie": "General knowledge",
       "nom": "Automotive",
       "slogan": "Play at over 300 an hour"
     },
     "es": {
+      "domaine": "Cultura",
       "catégorie": "Cultura general",
       "nom": "Automoción",
       "slogan": "Juega a más de 300 por hora"
     },
     "it": {
+      "domaine": "Cultura",
       "catégorie": "Cultura generale",
       "nom": "Automobilistico",
       "slogan": "Gioca a oltre 300 all'ora"
     },
     "de": {
+      "domaine": "Kultur",
       "catégorie": "Allgemeine Kultur",
       "nom": "Automobil",
       "slogan": "Spielen Sie mit über 300 pro Stunde"
     },
     "nl": {
+      "domaine": "Cultuur",
       "catégorie": "Algemene cultuur",
       "nom": "Automobiel",
       "slogan": "Speel met meer dan 300 per uur"

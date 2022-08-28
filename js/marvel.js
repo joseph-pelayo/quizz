@@ -6,10 +6,9 @@ let url = ["./json/marvel.json","./json/automobile.json","./json/fourmis.json","
 /* ================================ FUNCTIONS =============================== */
 /* ========================================================================== */
 
-
+// Fill data from JSON file and add data attributes for each card
 function fillCard(dataQuizz) {
 
-    let quizzCards;
     let j = 0;
     let levelQuizz = dataQuizz.quizz.fr;
 
@@ -20,20 +19,23 @@ function fillCard(dataQuizz) {
             quizzCards = document.querySelectorAll('.card.marvel-card');
             break;
         case 'Automobile':
-            quizzCards = document.querySelectorAll('.automotive-card');
+            quizzCards = document.querySelectorAll('.card.automotive-card');
             break;
         case 'Fourmis':
-            quizzCards = document.querySelectorAll('.ants-card');
+            quizzCards = document.querySelectorAll('.card.ants-card');
             break;
         default:
-            quizzCards = document.querySelectorAll('.history-card');
+            quizzCards = document.querySelectorAll('.card.history-card');
     }
 
-    // Fill data for the header and body HTML elements in each card
     for (i=0; i < quizzCards.length; i++) {
 
+        quizzCards[i].querySelector('.card-header').firstElementChild.textContent = dataQuizz['catégorie-nom-slogan'].fr['domaine'];
+        quizzCards[i].setAttribute('data-card-domain', dataQuizz['catégorie-nom-slogan'].fr['domaine']);
         quizzCards[i].querySelector('.card-header').lastElementChild.textContent = dataQuizz['catégorie-nom-slogan'].fr['catégorie'];
+        quizzCards[i].setAttribute('data-card-category', dataQuizz['catégorie-nom-slogan'].fr['catégorie']);
         quizzCards[i].querySelector('.card-title').textContent = dataQuizz['catégorie-nom-slogan'].fr.nom;
+        quizzCards[i].setAttribute('data-card-name', dataQuizz['catégorie-nom-slogan'].fr.nom);
         quizzCards[i].querySelector('.card-text').textContent = dataQuizz['catégorie-nom-slogan'].fr.slogan;
     }
 
@@ -42,11 +44,25 @@ function fillCard(dataQuizz) {
 
         quizzCards[j].querySelector('.card-level').textContent = `Niveau ${level}`;
         quizzCards[j].querySelector('.card-volume').textContent = `${levelQuizz[level].length} questions`;
+        quizzCards[j].setAttribute('data-card-level', level);
+        quizzCards[j].setAttribute('data-card-volume', levelQuizz[level].length);
         j++;
         
     });
 
 }
+
+function removeClass(strClass) {
+
+    const quizzCards = document.querySelectorAll('.card');
+
+    quizzCards.forEach(card => {
+
+        card.classList.remove(strClass);
+
+    })
+}
+
 
 // Function for managing the popup window
 // Opacity status ==> 0 : Hidden / 1 : Visible
@@ -54,7 +70,13 @@ function displayPopup(modalWindow, displayMode, displayStatus) {
 
     document.getElementById('backdrop').style.display = displayMode;
     document.getElementById(modalWindow).style.display = displayMode;
-    (displayStatus == 0) ? document.getElementById(modalWindow).style.opacity = 0 : document.getElementById(modalWindow).style.opacity = 1;
+    if( displayStatus) {
+        document.getElementById(modalWindow).style.opacity = 1;
+    } else {
+        document.getElementById(modalWindow).style.opacity = 0;
+        // document.querySelector('.card.selected').classList.toggle('selected');
+        removeClass('selected');
+    }
 
 }
 
@@ -64,11 +86,14 @@ function defineClickListenerOnCard() {
     const quizzCards = document.querySelectorAll('.card');
 
     // When the user clicks on a card, open the modal popup
+    // and set the card as selected with a new class
     quizzCards.forEach(card => {
 
         card.addEventListener('click', () => {
 
-            displayPopup('popup-quizz', 'block', 1 );
+            // card.classList.toggle("selected");
+            card.classList.add("selected")
+            displayPopup('popup-quizz', 'block', true );
 
         });
 
