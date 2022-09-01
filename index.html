@@ -292,26 +292,42 @@
                   <!-- Modal Body -->
                   <div class="modal-body text-center">
                     <p>Marvel heroes</p>
-                    <div class="body-info">
-                      <div id="quizz-zone" class="quizz-zone position-relative">
-                        <div class="question-index">
-                          <span>Question 1 / 10</span>
-                        </div>
-                        <div class="quizz-question p-4">
-                          <p>Dans quelles aventures retrouve-t-on les personnages de Loïs et Clark ?</p>
-                          <ul class="quizz-answer list-group list-group-horizontal d-flex justify-content-around align-items-center flex-wrap">
-                            <li class="list-group-item d-flex align-items-center"><span class="icon-answer"><i class="fa-solid fa-circle-a"></i></span>Superman
+                    <div class="body-quizz">
+
+                      <form id="quizz-zone" autocomplete="off" class="quizz-zone position-relative">
+                        <fieldset>
+                          <legend class="question-index">Question 1 / 10</legend>
+                          <p class="quizz-question p-2">Dans quelles aventures retrouve-t-on les personnages de Loïs et Clark ?</p>
+                          <ul class="quizz-choice-list input-group justify-content-around mb-4">
+                            <li class="form-check">
+                              <input class="form-check-input" type="radio" name="quizzresponse" id="quizzresponse-1" value="Superman">
+                              <label class="quizz-answer-item form-check-label text-start" for="quizzresponse-1"><span class="icon-answer">A</span>
+                                Superman
+                              </label>                            
                             </li>
-                            <li class="list-group-item d-flex align-items-center"><span class="icon-answer"><i class="fa-solid fa-circle-b"></i></span>Spider-Man
+                            <li class="form-check">
+                              <input class="form-check-input" type="radio" name="quizzresponse" id="quizzresponse-2">
+                              <label class="quizz-answer-item form-check-label text-start" for="quizzresponse-2"><span class="icon-answer">B</span>
+                                Spider-Man
+                              </label>                            
                             </li>
-                            <li class="list-group-item d-flex align-items-center"><span class="icon-answer"><i class="fa-solid fa-circle-c"></i></span>Hulk
+                            <li class="form-check">
+                              <input class="form-check-input" type="radio" name="quizzresponse" id="quizzresponse-3">
+                              <label class="quizz-answer-item form-check-label text-start" for="quizzresponse-3"><span class="icon-answer">C</span>
+                                Hulk
+                              </label>                            
                             </li>
-                            <li class="list-group-item d-flex align-items-center"><span class="icon-answer"><i class="fa-solid fa-circle-d"></i></span>Batman
+                            <li class="form-check">
+                              <input class="form-check-input" type="radio" name="quizzresponse" id="quizzresponse-4">
+                              <label class="quizz-answer-item form-check-label text-start" for="quizzresponse-4"><span class="icon-answer">D</span>
+                                Batman
+                              </label>                            
                             </li>
                           </ul>
-                        </div>
-                        <button type="button"></button>
-                      </div>
+                        </fieldset>
+                        <button type="submit" id="validate-btn" class="btn btn-outline-info btn-lg">Valider</button>
+                      </form>
+
                       <button type="button" id="launch-btn" class="btn btn-secondary btn-sm" title="It's time to play !">Lançer le quizz</button>
                     </div>
                   </div>

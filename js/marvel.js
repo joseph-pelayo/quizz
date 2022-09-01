@@ -197,6 +197,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
     });
 
+    // Tag the user's response in the choice list
+    // popupQuizz.querySelectorAll('.quizz-answer-item ').forEach(reponse => {
+    //     reponse.addEventListener('click', () => {
+       
+    //         toggleClass(reponse, 'choosen');
+
+    //     })
+    // })
+
 
 });
 
