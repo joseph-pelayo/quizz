@@ -153,8 +153,8 @@
               </div>
               <div class="card-body">
                 <p>20 questions</p>
-                <a href="#"
-                  class="card-link">Niveau facile</a>
+                <!-- <button class="btn btn-primary"
+                  onclick="showModal()">hello</button> -->
               </div>
             </div>
           </div>
@@ -201,41 +201,6 @@
               </div>
               <div class="card-body">
                 <p>20 questions</p>
-                <!-- Button trigger modal -->
-                <button type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal">
-                  Launch demo modal
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade"
-                  id="exampleModal"
-                  tabindex="-1"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button"
-                          class="btn btn-secondary"
-                          data-bs-dismiss="modal">Close</button>
-                        <button type="button"
-                          class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -260,7 +225,34 @@
               <div class=" card-body">
                 <p class="q1">10 questions</p>
                 <p class="n1">Niveau: Facile</p>
+                <button class="btn btn-primary"
+                  onclick="showModal('bonjour', 'ces pas facile')">hello</button>
 
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- AUTOMOBILE 2-->
+
+          <div class="col">
+            <div class="card auto-card"
+              style="width: 18rem;">
+              <img class="img-aut"
+                src="./img/325403_Dix_voitures_de_film_iconiques.jpg"
+                class="card-img-top"
+                alt="...">
+              <div class="card-header text-center">
+                <h3 class="auto"></h3>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">Quizz Automobile</h5>
+                <p class="card-text text-center">Testez vos connaissances sur l'automobile en générale.</p>
+              </div>
+              <div class=" card-body">
+                <p class="q2">10 questions</p>
+                <p class="n2">Niveau: Moyen</p>
 
                 <!-- Button trigger modal -->
                 <button type="button"
@@ -317,34 +309,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
 
-
-
-          <!-- AUTOMOBILE 2-->
-
-          <div class="col">
-            <div class="card auto-card"
-              style="width: 18rem;">
-              <img class="img-aut"
-                src="./img/325403_Dix_voitures_de_film_iconiques.jpg"
-                class="card-img-top"
-                alt="...">
-              <div class="card-header text-center">
-                <h3 class="auto"></h3>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title text-center">Quizz Automobile</h5>
-                <p class="card-text text-center">Testez vos connaissances sur l'automobile en générale.</p>
-              </div>
-              <div class=" card-body">
-                <p class="q2">10 questions</p>
-                <p class="n2">Niveau: Moyen</p>
-                <button type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#myModal">Launch modal</button>
 
               </div>
             </div>

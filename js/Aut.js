@@ -60,11 +60,6 @@ const userModal = async () => {
 
     let pb = (document.getElementById("pb").textContent =
       questQd[(i, indicequestion)].propositions[0]);
-
-    // function pour le questionaire confirmer
-
-    let anec2 = (document.getElementById("anecdote2").textContent =
-      questQc[(i, indicequestion)].anecdote);
   }
 };
 
@@ -75,12 +70,127 @@ suivant.addEventListener("click", () => {
   userModal();
 });
 
-//  partie modal
+// partie modal
 
-const myModal = document.querySelector("#myModal");
-
-myModal.addEventListener("show.bs.modal", (event) => {
-  if (!data) {
-    return event.preventDefault(); // stops modal from being shown
+let modalWrap = null;
+const showModal = () => {
+  anecdote, question;
+  //do not create multiple modal boxes
+  if (modalWrap !== null) {
+    modalWrap.remove();
   }
-});
+  modalWrap = document.createElement("div");
+  modalWrap.innerHTML = `
+                
+                <div class="modal fade"
+                  id="staticBackdrop"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"></button>
+                      </div>
+
+                    
+
+                      <div class="modal-body">
+                        <h4 class="anec"
+                          id="anecdote">${userData}</h4>
+                        <p class="quest"
+                          id="question">${question}</p>
+
+                        <div class="containerl">
+
+                          <ul class="propo">
+                            <li id="f"></li>
+                            <li id="b"></li>
+                          </ul>
+
+                          <ul class="propo">
+                            <li id="s"></li>
+                            <li id="pb"></li>
+                          </ul>
+
+                        </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button"
+                          class="btn btn-primary">Valider</button>
+                        <button type="button"
+                          class="btn btn-primary"
+                          id="suivant">Suivant</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+`;
+
+  document.body.append(modalWrap);
+  let modal = new bootstrap.Modal(modalWrap.querySelector(".modal")); //provided by bootstrap 5
+  modal.show();
+};
+
+// <!-- Button trigger modal -->
+//                 <button type="button"
+//                   class="btn btn-primary"
+//                   data-bs-toggle="modal"
+//                   data-bs-target="#staticBackdrop">
+//                   Commencer le quizz
+//                 </button>
+
+//                 <!-- Modal -->
+//                 <div class="modal fade"
+//                   id="staticBackdrop"
+//                   data-bs-backdrop="static"
+//                   data-bs-keyboard="false"
+//                   tabindex="-1"
+//                   aria-labelledby="staticBackdropLabel"
+//                   aria-hidden="true">
+//                   <div class="modal-dialog">
+//                     <div class="modal-content">
+//                       <div class="modal-header">
+//                         <button type="button"
+//                           class="btn-close"
+//                           data-bs-dismiss="modal"
+//                           aria-label="Close"></button>
+//                       </div>
+//                       <div class="modal-body">
+//                         <h4 class="anec"
+//                           id="anecdote"></h4>
+//                         <p class="quest"
+//                           id="question"></p>
+
+//                         <div class="containerl">
+
+//                           <ul class="propo">
+//                             <li id="f"></li>
+//                             <li id="b"></li>
+//                           </ul>
+
+//                           <ul class="propo">
+//                             <li id="s"></li>
+//                             <li id="pb"></li>
+//                           </ul>
+
+//                         </div>
+
+//                       </div>
+//                       <div class="modal-footer">
+//                         <button type="button"
+//                           class="btn btn-primary">Valider</button>
+//                         <button type="button"
+//                           class="btn btn-primary"
+//                           id="suivant">Suivant</button>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
