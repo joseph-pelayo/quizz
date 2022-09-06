@@ -237,12 +237,10 @@ input[type=radio]:checked + label {
     background-color: #90caf9;
 }
 
-
-
 button#launch-btn {
     display: block;
     position: absolute;
-    top: 16%;
+    top: 40%;
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(234, 11, 41, 0.8);
