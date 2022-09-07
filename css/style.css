@@ -112,7 +112,7 @@ body {
 
 .modal-content {
     border: 4px solid #fff;
-    background-image: url("../img/marvel-card-1.jpg");
+    /* background-image: url("../img/marvel-card-1.jpg"); */
     background-repeat: no-repeat;
     background-size: cover;
     /* overflow: hidden; */

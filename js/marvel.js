@@ -89,7 +89,7 @@
 
 
     // Create a popup window and load data from JSON file and data attributes
-    function createPopup(sourceData, levelQuestion, volumeQuestion) {
+    function createPopup(sourceData, levelQuestion, volumeQuestion, nomImage) {
 
         const pathSourceFile = jsonSourcePath + sourceData + '.json';
 
@@ -109,7 +109,7 @@
             modalHtmlPopup = `
             <div id="modal-popup" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-modal="true"">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
+                    <div class="modal-content" style="background-image: url('../img/${nomImage}.jpg');">
     
                         <!-- Modal Header -->
                         <div class="modal-header text-white">
@@ -128,7 +128,7 @@
                         <div class="modal-body text-center">
                             <p>${popupInfo.nom}</p>
                             <div class="body-quizz">
-                                <div id="quizz-zone" autocomplete="off" class="quizz-zone position-relative"></div>
+                                <div id="quizz-zone" class="quizz-zone position-relative"></div>
                                 <button type="button" id="validate-btn" class="btn btn-outline-info btn-lg">Valider</button>
                             </div>
                             <button type="button" id="launch-btn" class="btn btn-secondary btn-sm" title="It's time to play !">Lançer le quizz</button>
@@ -170,7 +170,7 @@
             card.addEventListener('click', () => {
 
                 // create modal window after get data from the selected card's data attributes
-                createPopup(card.dataset.cardSource, card.dataset.cardLevel, card.dataset.cardVolume);
+                createPopup(card.dataset.cardSource, card.dataset.cardLevel, card.dataset.cardVolume, card.dataset.cardImage);
                 
             });
 
@@ -192,9 +192,9 @@
             Object.keys(levelQuizz).forEach(level => {
 
                 htmlCardContent += `
-                    <li class="card" data-card-image="marvel-card-1" data-card-source=${fileSource} data-card-level=${level} data-card-volume=${levelQuizz[level].length}>
+                    <li class="card" data-card-image="${levelQuizz[level].image.filename}" data-card-source=${fileSource} data-card-level=${level} data-card-volume=${levelQuizz[level].questionnaire.length}>
                         <div class="card-img">
-                            <img src="./img/marvel-card-1.jpg" class="img-fluid" alt="Marvel heroes">
+                            <img src="${levelQuizz[level].image.source}" class="img-fluid" alt="${levelQuizz[level].image.alternative}">
                         </div>
                         <div class="card-header text-center">
                             <p class="outflow">${cardInfo.domaine}</p>
@@ -205,7 +205,7 @@
                             <p class="card-text text-center">${cardInfo.slogan}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <p class="card-volume">${levelQuizz[level].length} questions</p>
+                            <p class="card-volume">${levelQuizz[level].questionnaire.length} questions</p>
                             <p class="card-level">Niveau ${level}</p>
                         </div>
                     </li>
@@ -258,8 +258,6 @@
     // Global variables
     const jsonFilename = ["marvel","automobile","fourmis","histoire-de-france"];
     const jsonSourcePath = "./json/"
-    const imagePath = "../img/";
-    const extensionImage = ".jpg";
     let htmlCardContent = "";
     let modalHtmlPopup = "";
 
