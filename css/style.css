@@ -154,7 +154,7 @@ body {
     /* font-size: 30px; */
 }
 
-.modal-body p:not(.quizz-answer) {
+.modal-body p:not(.quizz-answer, .quizz-question) {
     font-size: 24px;
     font-weight: 700;
     text-shadow: 3px 3px 0px rgba(0,0,0,0.5);
@@ -196,6 +196,11 @@ body {
     font-size: 18px !important;
     font-weight: 400;
     width: 20%;
+}
+
+.quizz-question {
+    margin: 0;
+    font-size: 20px;
 }
 
 .quizz-choice-list {

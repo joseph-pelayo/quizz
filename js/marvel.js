@@ -173,8 +173,8 @@
                                 <div id="quizz-zone" class="quizz-zone position-relative">
                                     <form>
                                         <fieldset>
-                                            <legend class="question-index">Question 1 / 10</legend>
-                                            <p class="quizz-question p-2">Dans quelles aventures retrouve-t-on les personnages de Loïs et Clark ?</p>
+                                            <legend class="question-index"></legend>
+                                            <p class="quizz-question p-4"></p>
                                             <ul class="quizz-choice-list input-group justify-content-around mb-4">
                                                 <li class="form-check">
                                                     <input class="quizz-check-input form-check-input" type="radio" name="quizz-response" id="quizz-response-1" value="">
@@ -277,8 +277,8 @@
             popupQuizz.querySelector('#validate-btn').style.transition = "2s opacity ease-in-out 3s"
             document.querySelector('#validate-btn').style.zIndex = "999"
 
-                        // Populating the quizz with the first question and possible options
-                        showQuestion(questionCounter);
+            // Populating the quizz with the first question and possible options
+            populateQuizz(questionCounter);
             
         })
 
@@ -294,105 +294,85 @@
 
 
     // Display question and options for the quizz
-    function showQuestion(indexQuestion) {
+    function populateQuizz(indexQuestionnaire) {
+
+        const modalPopup = document.getElementById('modal-popup');
+        const urlQuizz = `${jsonSourcePath}${modalPopup.dataset.jsonSource}.json`
 
 
-        getData(`${jsonSourcePath}${document.getElementById('modal-popup').dataset.jsonSource}.json`)
-            .then(dataQA => {
+        getData(urlQuizz).then(dataQuizz => {
 
-            const listQuestions = dataQA.quizz.fr[`${document.getElementById('modal-popup').dataset.levelQuizz}`].questionnaire;
-            const quizzInputRadios = document.querySelectorAll('.quizz-check-input');
-            const quizzLabelPropositions = document.querySelectorAll('.quizz-check-label .quizz-answer');
-            let currentQuestion;
+            const availableQuestions = dataQuizz.quizz.fr[`${modalPopup.dataset.levelQuizz}`].questionnaire;
+            const availablePropositions = availableQuestions[indexQuestionnaire].propositions;
+            let currentQuestion = availableQuestions[indexQuestionnaire].question;
 
+            displayQuestion(indexQuestionnaire, availableQuestions.length, currentQuestion);
+            
+            displayPropositions(availablePropositions);
 
-            // if (isEnded(indexQuestion, listQuestions.length)) {
+            document.getElementById('validate-btn').addEventListener('click', () => {
 
-            //     showScores();
-    
-            // } else {
-
-            // while (isEnded(indexQuestion, listQuestions.length) == false)
-            while (indexQuestion <= listQuestions.length) {
-
-                const listPropositions = listQuestions[indexQuestion].propositions;
-                const quizzResponse = listQuestions[indexQuestion].réponse;
-                const quizzAnecdote = listQuestions[indexQuestion].anecdote;
-
-                console.log(`Question : ${indexQuestion}`);
-
-                // Show index
-                currentQuestion = indexQuestion + 1;
-                document.querySelector('.question-index').textContent = `Question ${currentQuestion} / ${listQuestions.length}`;
-    
-                // Show question
-                document.querySelector('.quizz-question').textContent = `${listQuestions[indexQuestion].question}`;
-
-                // Show options
-                listPropositions.map((item, index) => {
-
-                    quizzInputRadios[index].value = item;
-                    quizzLabelPropositions[index].textContent = item;
-    
-                });
-
-
-                document.getElementById('validate-btn').addEventListener('click', () => {
-
-                    const checkedRadioInput = document.querySelector('input[name="quizz-response"]:checked');
-                    const checkedLabelInput = document.querySelector('input[name="quizz-response"]:checked + label');
-                    
-                    // Display the anecdote 
-
-                    // Manage buttons and anecdote with a setimeout
-                    // Disable the user validation button
-                    toggleClass(document.querySelector('#validate-btn'), 'visible');
-                    document.querySelector('#validate-btn').style.transition = "1s opacity linear"
-                    document.querySelector('#validate-btn').style.zIndex = "998"
-
-
-                    // Enable the next question button
-                    toggleClass(document.querySelector('#nextquestion-btn'), 'visible');
-                    document.querySelector('#nextquestion-btn').style.transition = "1s opacity linear"
-                    document.querySelector('#nextquestion-btn').style.zIndex = "999"
-
-                    // Control the answer of the user
-                    // if (isCorrectAnswer(checkedRadioInput.value, quizzResponse)) {
-
-                    //     checkedLabelInput.style.backgroundColor = 'green';
-
-                    //     alert("Bonne réponse");
-
-                    // } else {
-
-                    //     checkedLabelInput.style.backgroundColor = 'red';
-                    //     alert("Mauvaise réponse");
-                    // }
-
-                });
-
-                document.getElementById('nextquestion-btn').addEventListener('click', () => {
-
-
-                    alert('Je passe à la question suivante');
-                    indexQuestion++;
-
-                })
-
-                // setTimeout(() => {
-
-                    
-
-                // }, "4000");
-
+                const checkedRadioInput = document.querySelector('input[name="quizz-response"]:checked');
+                const checkedLabelInput = document.querySelector('input[name="quizz-response"]:checked + label');
                 
-                
+                // Display the anecdote 
 
-            }   
+                // Disable the user validation button
+                toggleClass(document.querySelector('#validate-btn'), 'visible');
+                document.querySelector('#validate-btn').style.transition = "1s opacity linear"
+                document.querySelector('#validate-btn').style.zIndex = "998"
+
+                // Enable the next question button
+                toggleClass(document.querySelector('#nextquestion-btn'), 'visible');
+                document.querySelector('#nextquestion-btn').style.transition = "1s opacity linear"
+                document.querySelector('#nextquestion-btn').style.zIndex = "999"
+
+
+            });
+
+            document.getElementById('nextquestion-btn').addEventListener('click', () => {
+
+
+                alert('Je passe à la question suivante');
+                indexQuestion++;
+
+            })
+
+            currentQuestion +=1;                
    
         })
 
     };
+
+
+    // Load each question and his index
+    function displayQuestion(indiceQuestionnaire, totalQuestions, actualQuestion) {
+
+        let legendIndex = indiceQuestionnaire + 1;
+
+        // Show index
+        document.querySelector('.question-index').textContent = `Question ${legendIndex} / ${totalQuestions}`;
+
+        // Show question
+        document.querySelector('.quizz-question').textContent = `${actualQuestion}`;
+
+    }
+
+
+    // load possible answers
+    function displayPropositions(listPropositions) {
+
+        const quizzInputRadios = document.querySelectorAll('.quizz-check-input');
+        const quizzLabelPropositions = document.querySelectorAll('.quizz-check-label .quizz-answer');
+
+        listPropositions.map((item, index) => {
+
+            quizzInputRadios[index].value = item;
+            quizzLabelPropositions[index].textContent = item;
+
+        });
+
+    }
 
 
     // Test the end of the quizz
@@ -412,21 +392,48 @@
 
     }
 
+    // const quizzResponse = availableQuestions[indexQuestionnaire].réponse;
+    // const quizzAnecdote = availableQuestions[indexQuestionnaire].anecdote;
 
-        // // Controls if the modal has finished being hidden from the user
-        // // and complete CSS transitions
-        // popupQuizz.addEventListener('hidden.bs.modal', event => {
+    // if (isEnded(indexQuestion, availableQuestions.length)) {
 
-        //     // enabling information bars in the footer
-        //     popupQuizz.querySelectorAll('.bar').forEach(bar => {
+    //     showScores();
 
-        //         toggleClass(bar, 'enabled');
+    // } else {
 
-        //     });
+    // while (isEnded(indexQuestion, availableQuestions.length) == false) {
 
-        //     // toggleClass(popupQuizz.querySelector('#quizz-zone'), 'active');
-            
-        // });
+    // }
+
+
+    // Control the answer of the user
+    // if (isCorrectAnswer(checkedRadioInput.value, quizzResponse)) {
+
+    //     checkedLabelInput.style.backgroundColor = 'green';
+
+    //     alert("Bonne réponse");
+
+    // } else {
+
+    //     checkedLabelInput.style.backgroundColor = 'red';
+    //     alert("Mauvaise réponse");
+    // }
+
+
+    // // Controls if the modal has finished being hidden from the user
+    // // and complete CSS transitions
+    // popupQuizz.addEventListener('hidden.bs.modal', event => {
+
+    //     // enabling information bars in the footer
+    //     popupQuizz.querySelectorAll('.bar').forEach(bar => {
+
+    //         toggleClass(bar, 'enabled');
+
+    //     });
+
+    //     // toggleClass(popupQuizz.querySelector('#quizz-zone'), 'active');
+        
+    // });
 
 
 
