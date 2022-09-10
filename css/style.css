@@ -112,7 +112,6 @@ body {
 
 .modal-content {
     border: 4px solid #fff;
-    /* background-image: url("../img/marvel-card-1.jpg"); */
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -163,9 +162,11 @@ body {
 .body-quizz {
     position: relative;
     margin-top: 40px;
+    /* overflow: hidden; */
 }
 
-.quizz-zone {
+.quizz-slider {
+    height: 250px;
     top: 455px;
     background-color : rgba(33, 47, 60,0.8);
     margin: 0 30px;
@@ -175,22 +176,35 @@ body {
     transition: all 2s ease-in-out 1s;
 }
 
-.quizz-zone.active {
-    top: 15px;
+.quizz-slider.active {
+    top: 0;
     transform: translateY(-10px);
 }
 
-.quizz-zone ul,
-.quizz-zone li {
+.quizz-slider ul,
+.quizz-slider li {
     padding: 0;
 }
+
+.quizz-slide {
+    position: absolute;
+    top: 13px;
+    left: 0;
+    opacity: 0;
+}
+
+.quizz-slide.is_active {
+    z-index: 999;
+    opacity: 1;
+}
+
 
 .question-index {
     position: absolute;
     border-radius: 30px;
     padding: 8px 20px;
     background-color:rgba(0, 151, 230, 1);
-    top: -20px;
+    top: -38px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 18px !important;
@@ -247,31 +261,38 @@ input[type=radio]:checked + label {
 
 .quizz-buttons {
     position: relative;
-    margin-top: 25px;
+    margin-top: 12px;
     height: 48px;
 }
 
 .quizz-btn {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color:  #cacfd2;
-    color: #fff;
-    border: 1px solid #fff;
+    font-size: 1.125rem;
+    font-weight: 500;
     opacity: 0;
+}
+
+.quizz-btn.disabled {
+    background-color:  #dae7fb;
+    border-color: #dae7fb;
+    color: rgba(0, 97, 242, 1);
+    box-shadow: none;
 }
 
 .quizz-btn.visible {
     opacity: 1;
 }
 
+.quizz-btn:not(.disabled) {
+    box-shadow: 0 0 12px rgba(235, 241, 235, 1);
+    border: 1px solid rgba(235, 241, 235, 1);
+}
+
 button#launch-btn {
     display: block;
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     background-color: rgba(234, 11, 41, 0.8);
     width: 150px;
     height: 150px;

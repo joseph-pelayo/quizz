@@ -170,36 +170,13 @@
                         <div class="modal-body text-center">
                             <p>${popupInfo.nom}</p>
                             <div id="body-quizz" class="body-quizz">
-                                <div id="quizz-zone" class="quizz-zone position-relative">
-                                    <form>
-                                        <fieldset>
-                                            <legend class="question-index"></legend>
-                                            <p class="quizz-question p-4"></p>
-                                            <ul class="quizz-choice-list input-group justify-content-around mb-4">
-                                                <li class="form-check">
-                                                    <input class="quizz-check-input form-check-input" type="radio" name="quizz-response" id="quizz-response-1" value="">
-                                                    <label class="quizz-check-label form-check-label text-start d-flex align-items-center" for="quizz-response-1"><span class="icon-answer"><i class="fa-solid fa-a"></i></span><p class="quizz-answer"></p></label>
-                                                </li>
-                                                <li class="form-check">
-                                                    <input class="quizz-check-input form-check-input" type="radio" name="quizz-response" id="quizz-response-2" value="">
-                                                    <label class="quizz-check-label form-check-label text-start d-flex align-items-center" for="quizz-response-2"><span class="icon-answer"><i class="fa-solid fa-b"></i></span><p class="quizz-answer"></p></label>
-                                                </li>
-                                                <li class="form-check">
-                                                    <input class="quizz-check-input form-check-input" type="radio" name="quizz-response" id="quizz-response-3" value="">
-                                                    <label class="quizz-check-label form-check-label text-start d-flex align-items-center" for="quizz-response-3"><span class="icon-answer"><i class="fa-solid fa-c"></i></span><p class="quizz-answer"></p></label>
-                                                </li>
-                                                <li class="form-check">
-                                                    <input class="quizz-check-input form-check-input" type="radio" name="quizz-response" id="quizz-response-4" value="">
-                                                    <label class="quizz-check-label form-check-label text-start d-flex align-items-center" for="quizz-response-4"><span class="icon-answer"><i class="fa-solid fa-d"></i></span><p class="quizz-answer"></p></label>
-                                                </li>
-                                            </ul>
-                                        </fieldset>
-                                    </form>
+                                <div id="quizz-zone" class="quizz-slider position-relative">
+
                                 </div>
                             </div>
                             <div class="quizz-buttons">
-                                <button type="button" id="validate-btn" class="btn btn-outline-info btn-lg quizz-btn">Valider</button>
-                                <button type="button" id="nextquestion-btn" class="btn btn-outline-info btn-lg quizz-btn">Suivant</button>
+                                <button type="button" id="validate-btn" class="btn btn-lg btn-primary me-3 quizz-btn">Valider</button>
+                                <button type="button" id="nextquestion-btn" class="btn btn-lg btn-primary quizz-btn">Suivant</button>
                             </div>
                             <button type="button" id="launch-btn" class="btn btn-secondary btn-sm" title="It's time to play !">Lançer le quizz</button>
                         </div>
@@ -221,14 +198,82 @@
     
             cardList.insertAdjacentHTML('beforeend', modalHtmlPopup);
 
-            displayPopup();
+            // displayPopup();
+            loadQuestions();
 
         })
   
     }
 
+
+    // Generate quizz slides with available questions
+    function loadQuestions() {
+
+        const modalPopup = document.getElementById('modal-popup');
+        const urlQuizz = `${jsonSourcePath}${modalPopup.dataset.jsonSource}.json`
+
+        getData(urlQuizz).then(dataQuizz => {
+
+            const quizzSlider = document.getElementById('quizz-zone');
+            const availableQuestions = dataQuizz.quizz.fr[`${modalPopup.dataset.levelQuizz}`].questionnaire;
+
+            let slideItem = "";
+
+            availableQuestions.map((item, index) => {
+
+                const availablePropositions = availableQuestions[index].propositions;
+                let listPropositions = loadPropositions(availablePropositions, item.id);
+                let legendIndex = index + 1;
+
+                // Load one question and his index for each slide
+                slideItem += `
+                    <div class="quizz-slide">
+                        <form>
+                            <fieldset>
+                                <legend class="question-index">Question ${legendIndex} / ${availableQuestions.length}</legend>
+                                <p class="quizz-question p-4">${item.question}</p>
+                                <ul id="quizz-propositions" class="quizz-choice-list input-group justify-content-around mb-4">${listPropositions}</ul>
+                            </fieldset>
+                        </form>
+                    </div>`;
+                
+            });
+
+            quizzSlider.innerHTML = slideItem;
+
+            displayPopup();
+
+        });
+
+    };
+
+    // Complete quizz slides with available propositions per question
+    function loadPropositions(arrayPropositions, idQuestion) {
+
+        let htmlQuizzPropositions ="";
+        const iconAlphabet = ["a","b","c","d"];
+
+        arrayPropositions.map((proposition, index) => {
+
+            let numQuestion = index + 1;
+
+            htmlQuizzPropositions += `
+                <li class="form-check">
+                    <input class="quizz-check-input form-check-input" type="radio" name="q${idQuestion}" id="q${idQuestion}-response${numQuestion}" value="${proposition}">
+                    <label class="quizz-check-label form-check-label text-start d-flex align-items-center" for="q${idQuestion}-response${numQuestion}"><span class="icon-answer"><i class="fa-solid fa-${iconAlphabet[index]}"></i></span><p class="quizz-answer">${proposition}</p></label>
+                </li>`;
+
+        })
+
+        return htmlQuizzPropositions;
+
+    }
+
+
     // Show the popup windows
     function displayPopup() {
+
+        let currentSlide = 0;
 
         // Provided by Bootstrap documentation
         const modalWindow = new bootstrap.Modal(document.getElementById('modal-popup'), {
@@ -241,6 +286,7 @@
 
         const popupQuizz = document.getElementById('modal-popup');
         const quizzLauncher = popupQuizz.querySelector('#launch-btn');
+        const quizzButtons = popupQuizz.querySelectorAll('.quizz-btn');
 
         // Controls if the modal has been made visible to the user and complete CSS transitions
         popupQuizz.addEventListener('shown.bs.modal', event => {
@@ -256,10 +302,8 @@
         });
 
         quizzLauncher.addEventListener('click', () => {
-
-            let questionCounter = 0;
    
-            // Enable the quizz zone
+            // Enable the quizz slider
             toggleClass(popupQuizz.querySelector('#quizz-zone'), 'active');
     
             // Disable information bars in the footer
@@ -271,109 +315,87 @@
             
             // Disable the launcher button
             toggleClass(quizzLauncher, 'enabled');
-    
-            // Enable the user validation button
-            toggleClass(popupQuizz.querySelector('#validate-btn'), 'visible');
-            popupQuizz.querySelector('#validate-btn').style.transition = "2s opacity ease-in-out 3s"
-            document.querySelector('#validate-btn').style.zIndex = "999"
 
-            // Populating the quizz with the first question and possible options
-            populateQuizz(questionCounter);
+            // Activate the first slide
+            toggleClass(document.querySelectorAll('.quizz-slide')[currentSlide], 'is_active');
+    
+            // Enable the user buttons
+            quizzButtons.forEach(itmButton => {
+
+                toggleClass(itmButton, 'visible');
+                itmButton.style.transition = "2s opacity ease-in-out 3s";
+            })
+
+            // Disable the next question button
+            toggleClass(document.getElementById('nextquestion-btn'), 'disabled');
             
+        })
+
+        document.getElementById('validate-btn').addEventListener('click', () => {
+
+            const activeSlide = document.querySelector('.quizz-slide.is_active');
+            const checkedRadioInputs = activeSlide.querySelectorAll('.quizz-check-input:checked');
+            // const checkedLabelInput = document.querySelector('input[name="quizz-response"]:checked + label');
+
+            console.log(isChecked(checkedRadioInputs))
+
+            switch (isChecked(checkedRadioInputs)) {
+
+                case false:
+
+                    // display message
+                    alert("Merci de sélectionner une réponse");
+                    break;
+
+                default:
+
+                    // Display the anecdote
+
+                    // Disable the user validation button
+                    toggleClass(document.getElementById('validate-btn'), 'disabled');
+
+                    // Enable the next question button
+                    toggleClass(document.getElementById('nextquestion-btn'), 'disabled');
+
+            }
+
+        });
+
+        document.getElementById('nextquestion-btn').addEventListener('click', () => {
+
+            // Disable the current slide
+            toggleClass(document.querySelectorAll('.quizz-slide')[currentSlide], 'is_active');
+
+            currentSlide += 1;
+
+            // Enable the next slide
+            toggleClass(document.querySelectorAll('.quizz-slide')[currentSlide], 'is_active');
+
+            // Enable the user validation button
+            toggleClass(document.getElementById('validate-btn'), 'disabled');
+
+            // Disable the next question button
+            toggleClass(document.getElementById('nextquestion-btn'), 'disabled');
+
         })
 
     }
 
 
-    // Enables / Disables a HTML class
+    // Enable / Disable a HTML class
     function toggleClass(elementQuizz, strClass) {
 
         elementQuizz.classList.toggle(strClass);
 
     }
 
+    // Control if the user has selected a response
+    function isChecked(listCheckedInputs) {
 
-    // Display question and options for the quizz
-    function populateQuizz(indexQuestionnaire) {
-
-        const modalPopup = document.getElementById('modal-popup');
-        const urlQuizz = `${jsonSourcePath}${modalPopup.dataset.jsonSource}.json`
-
-
-        getData(urlQuizz).then(dataQuizz => {
-
-            const availableQuestions = dataQuizz.quizz.fr[`${modalPopup.dataset.levelQuizz}`].questionnaire;
-            const availablePropositions = availableQuestions[indexQuestionnaire].propositions;
-            let currentQuestion = availableQuestions[indexQuestionnaire].question;
-
-            displayQuestion(indexQuestionnaire, availableQuestions.length, currentQuestion);
-            
-            displayPropositions(availablePropositions);
-
-            document.getElementById('validate-btn').addEventListener('click', () => {
-
-                const checkedRadioInput = document.querySelector('input[name="quizz-response"]:checked');
-                const checkedLabelInput = document.querySelector('input[name="quizz-response"]:checked + label');
-                
-                // Display the anecdote 
-
-                // Disable the user validation button
-                toggleClass(document.querySelector('#validate-btn'), 'visible');
-                document.querySelector('#validate-btn').style.transition = "1s opacity linear"
-                document.querySelector('#validate-btn').style.zIndex = "998"
-
-                // Enable the next question button
-                toggleClass(document.querySelector('#nextquestion-btn'), 'visible');
-                document.querySelector('#nextquestion-btn').style.transition = "1s opacity linear"
-                document.querySelector('#nextquestion-btn').style.zIndex = "999"
-
-
-            });
-
-            document.getElementById('nextquestion-btn').addEventListener('click', () => {
-
-
-                alert('Je passe à la question suivante');
-                indexQuestion++;
-
-            })
-
-            currentQuestion +=1;                
-   
-        })
-
-    };
-
-
-    // Load each question and his index
-    function displayQuestion(indiceQuestionnaire, totalQuestions, actualQuestion) {
-
-        let legendIndex = indiceQuestionnaire + 1;
-
-        // Show index
-        document.querySelector('.question-index').textContent = `Question ${legendIndex} / ${totalQuestions}`;
-
-        // Show question
-        document.querySelector('.quizz-question').textContent = `${actualQuestion}`;
+        let selectedInput = listCheckedInputs.length !== 0 ? true : false;
+        return selectedInput;
 
     }
-
-
-    // load possible answers
-    function displayPropositions(listPropositions) {
-
-        const quizzInputRadios = document.querySelectorAll('.quizz-check-input');
-        const quizzLabelPropositions = document.querySelectorAll('.quizz-check-label .quizz-answer');
-
-        listPropositions.map((item, index) => {
-
-            quizzInputRadios[index].value = item;
-            quizzLabelPropositions[index].textContent = item;
-
-        });
-
-    }
-
 
     // Test the end of the quizz
     function isEnded(indexArray, lengthArray) {
