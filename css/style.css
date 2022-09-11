@@ -259,6 +259,10 @@ input[type=radio]:checked + label {
     background-color: #90caf9;
 }
 
+input[type=radio] + label.disabled {
+    pointer-events: none;
+}
+
 .quizz-buttons {
     position: relative;
     margin-top: 12px;
@@ -283,8 +287,8 @@ input[type=radio]:checked + label {
 }
 
 .quizz-btn:not(.disabled) {
-    box-shadow: 0 0 12px rgba(235, 241, 235, 1);
     border: 1px solid rgba(235, 241, 235, 1);
+    box-shadow: 0 0 12px rgba(235, 241, 235, 1); 
 }
 
 button#launch-btn {
@@ -318,8 +322,12 @@ button#launch-btn.enabled {
     border: 0;
     color: #fff;
     padding: 12px 0;
-    /* background-color: rgba(47, 54, 64, 0.5); */
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+}
+
+.modal-footer.active {
+    background-color: rgba(47, 54, 64, 0.8);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    transition: background-color 2s ease-in-out 4s;
 }
 
 .bar {
@@ -360,7 +368,10 @@ button#launch-btn.enabled {
     transform: translateX(285px);
 }
 
-
-
+.quizz-message {
+    color: #f53b57;
+    font-weight: 500;
+    border: 1px solid #fff;
+}
 
 

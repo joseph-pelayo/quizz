@@ -12,6 +12,7 @@
     const jsonSourcePath = "./json/"
     let htmlCardContent = "";
     let modalHtmlPopup = "";
+    let currentSlide;
 
 
     // Selecting all required HTML elements
@@ -27,9 +28,6 @@
         generateCard(data, jsonFilename);
 
     });
-
-
-
 
 
     /* ========================================================================== */
@@ -149,7 +147,7 @@
             }
     
             modalHtmlPopup = `
-            <div id="modal-popup" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-modal="true" data-json-source="${sourceData}" data-level-quizz="${levelQuestion}">
+            <div id="modal-popup" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-modal="true" data-origin-quizz="${sourceData}" data-level-quizz="${levelQuestion}" data-volume-quizz="${volumeQuestion}">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content" style="background-image: url('../img/${nomImage}.jpg');">
     
@@ -186,6 +184,7 @@
                             <div class="bar left-bar position-relative">
                                 <p>${volumeQuestion} questions</p>
                             </div>
+                            <p class="quizz-message text-center"></p>
                             <div class="bar right-bar position-relative">
                                 <p>Niveau ${levelQuestion}</p>
                             </div>
@@ -207,10 +206,11 @@
 
 
     // Generate quizz slides with available questions
+    // according to json data source and quizz level from HTML data attributes
     function loadQuestions() {
 
         const modalPopup = document.getElementById('modal-popup');
-        const urlQuizz = `${jsonSourcePath}${modalPopup.dataset.jsonSource}.json`
+        const urlQuizz = `${jsonSourcePath}${modalPopup.dataset.originQuizz}.json`
 
         getData(urlQuizz).then(dataQuizz => {
 
@@ -273,7 +273,9 @@
     // Show the popup windows
     function displayPopup() {
 
-        let currentSlide = 0;
+        const popupQuizz = document.getElementById('modal-popup');
+        const quizzLauncher = popupQuizz.querySelector('#launch-btn');
+
 
         // Provided by Bootstrap documentation
         const modalWindow = new bootstrap.Modal(document.getElementById('modal-popup'), {
@@ -283,10 +285,6 @@
         });
 
         modalWindow.show();
-
-        const popupQuizz = document.getElementById('modal-popup');
-        const quizzLauncher = popupQuizz.querySelector('#launch-btn');
-        const quizzButtons = popupQuizz.querySelectorAll('.quizz-btn');
 
         // Controls if the modal has been made visible to the user and complete CSS transitions
         popupQuizz.addEventListener('shown.bs.modal', event => {
@@ -300,6 +298,20 @@
             toggleClass(quizzLauncher, 'enabled');
             
         });
+
+        launchQuizz();
+
+    }
+
+
+    // Launch the quizz
+    function launchQuizz() {
+
+        const popupQuizz = document.getElementById('modal-popup');
+        const quizzLauncher = popupQuizz.querySelector('#launch-btn');
+        const quizzButtons = popupQuizz.querySelectorAll('.quizz-btn');
+        const quizzSlides = popupQuizz.querySelectorAll('.quizz-slide');
+        let initialSlide = 0;
 
         quizzLauncher.addEventListener('click', () => {
    
@@ -317,7 +329,7 @@
             toggleClass(quizzLauncher, 'enabled');
 
             // Activate the first slide
-            toggleClass(document.querySelectorAll('.quizz-slide')[currentSlide], 'is_active');
+            toggleClass(quizzSlides[initialSlide], 'is_active');
     
             // Enable the user buttons
             quizzButtons.forEach(itmButton => {
@@ -328,56 +340,23 @@
 
             // Disable the next question button
             toggleClass(document.getElementById('nextquestion-btn'), 'disabled');
+
+            // Activate the footer for quizz tools
+            toggleClass(document.querySelector('.modal-footer'), 'active');
             
         })
 
         document.getElementById('validate-btn').addEventListener('click', () => {
 
-            const activeSlide = document.querySelector('.quizz-slide.is_active');
-            const checkedRadioInputs = activeSlide.querySelectorAll('.quizz-check-input:checked');
-            // const checkedLabelInput = document.querySelector('input[name="quizz-response"]:checked + label');
-
-            console.log(isChecked(checkedRadioInputs))
-
-            switch (isChecked(checkedRadioInputs)) {
-
-                case false:
-
-                    // display message
-                    alert("Merci de sélectionner une réponse");
-                    break;
-
-                default:
-
-                    // Display the anecdote
-
-                    // Disable the user validation button
-                    toggleClass(document.getElementById('validate-btn'), 'disabled');
-
-                    // Enable the next question button
-                    toggleClass(document.getElementById('nextquestion-btn'), 'disabled');
-
-            }
+            validateUserResponse();
 
         });
 
         document.getElementById('nextquestion-btn').addEventListener('click', () => {
 
-            // Disable the current slide
-            toggleClass(document.querySelectorAll('.quizz-slide')[currentSlide], 'is_active');
+            displayNextQuestion();
 
-            currentSlide += 1;
-
-            // Enable the next slide
-            toggleClass(document.querySelectorAll('.quizz-slide')[currentSlide], 'is_active');
-
-            // Enable the user validation button
-            toggleClass(document.getElementById('validate-btn'), 'disabled');
-
-            // Disable the next question button
-            toggleClass(document.getElementById('nextquestion-btn'), 'disabled');
-
-        })
+        });
 
     }
 
@@ -389,76 +368,175 @@
 
     }
 
-    // Control if the user has selected a response
-    function isChecked(listCheckedInputs) {
 
-        let selectedInput = listCheckedInputs.length !== 0 ? true : false;
-        return selectedInput;
+    // When the user clicks on the validation button
+    function validateUserResponse() {
+
+        const quizzMessage = document.querySelector('.quizz-message');
+        const activeSlide = document.querySelector('.quizz-slide.is_active');
+        const checkedRadioInput = activeSlide.querySelector('.quizz-check-input:checked');
+        // const checkedLabelInput = document.querySelector('input[name="quizz-response"]:checked + label');
+
+        switch (isChecked(checkedRadioInput)) {
+
+            case false:
+
+                // display message
+                quizzMessage.textContent = 'Merci de sélectionner une réponse !';
+                setTimeout(() => {quizzMessage.textContent = ""}, 1500);
+                break;
+
+            default:
+
+                // Select all the labels for the current question
+                const currentQuestionLabels = document.querySelectorAll('.quizz-slide.is_active input[type=radio] + label');
+
+                // Lock temporarely events on labels
+                preventlabelEvents(currentQuestionLabels);
+                
+                // Verify the response
+                controlResponse(checkedRadioInput.value);
+
+        }
 
     }
 
-    // Test the end of the quizz
-    function isEnded(indexArray, lengthArray) {
+    // Next question
+    function displayNextQuestion() {
 
-        let endQuizz = indexArray === lengthArray ? true : false;
+        const popupQuizz = document.getElementById('modal-popup');
+        const quizzSlides = popupQuizz.querySelectorAll('.quizz-slide');
+        const totalSlides = quizzSlides.length;
+
+        previousSlide = searchActiveSlideIndex(quizzSlides);
+
+        // Disable the current slide
+        toggleClass(document.querySelectorAll('.quizz-slide')[previousSlide], 'is_active');
+
+        nextSlide = previousSlide + 1;
+
+        if (isEnded(nextSlide, totalSlides)) {
+
+            // Show scores
+            alert('Afficher scores');
+            // setTimeout(() => {showScores()}, 2000);
+
+        } else {
+
+            // Enable the next slide
+            toggleClass(document.querySelectorAll('.quizz-slide')[nextSlide], 'is_active');
+
+            // Enable the user validation button
+            toggleClass(document.getElementById('validate-btn'), 'disabled');
+
+            // Disable the next question button
+            toggleClass(document.getElementById('nextquestion-btn'), 'disabled');
+            
+        }
+
+    }
+
+
+    // Control if the user has selected a response
+    function isChecked(listCheckedInput) {
+
+        let selectedRadioInput = listCheckedInput !== null ? true : false;
+        return selectedRadioInput;
+
+    }
+
+
+    // Allow / prevent pointer events on labels
+    function preventlabelEvents(listInputLabels) {
+
+        for (let j = 0; j <= ((listInputLabels.length)-1); j++) {
+
+            toggleClass(listInputLabels[j], "disabled");
+
+        }
+
+    }
+
+
+    // Control the answer of the user
+    function controlResponse(userResponse) {
+
+        const modalPopup = document.getElementById('modal-popup');
+        const quizzSlides = modalPopup.querySelectorAll('.quizz-slide');
+        const urlQuizz = `${jsonSourcePath}${modalPopup.dataset.originQuizz}.json`
+        const indexQuestion = searchActiveSlideIndex(quizzSlides);
+
+        getData(urlQuizz).then(dataQuizz => {
+
+            const quizzAnswer = dataQuizz.quizz.fr[`${modalPopup.dataset.levelQuizz}`].questionnaire[indexQuestion].réponse;
+            const quizzAnecdote = dataQuizz.quizz.fr[`${modalPopup.dataset.levelQuizz}`].questionnaire[indexQuestion].anecdote;
+            const userCheckedLabel = document.querySelector('.quizz-slide.is_active input[type=radio]:checked + label');
+            const iconAnswer = userCheckedLabel.querySelector('.icon-answer');
+            const quizzMessage = document.querySelector('.quizz-message');
+
+
+            if (userResponse === quizzAnswer) {
+
+
+                
+                userCheckedLabel.style.backgroundColor = '#78e08f';
+                iconAnswer.innerHTML = `<i class="fa-solid fa-face-smile"></i>`;
+                iconAnswer.style.color = '#78e08f';
+
+
+            } else {
+
+                userCheckedLabel.style.backgroundColor = '#ea2027';
+                iconAnswer.innerHTML = `<i class="fa-solid fa-face-frown"></i>`;
+                iconAnswer.style.color = '#ea2027';
+
+            }
+
+            iconAnswer.style.backgroundColor = '#fff';
+
+
+            // Display the anecdote
+            quizzMessage.textContent = quizzAnecdote;
+
+
+
+        });
+
+
+        // Disable the user validation button
+        toggleClass(document.getElementById('validate-btn'), 'disabled');
+
+        // Enable the next question button
+        toggleClass(document.getElementById('nextquestion-btn'), 'disabled');
+
+
+    }
+
+
+    // Find the index of the current active slide
+    function searchActiveSlideIndex(listSlides) {
+
+        for (let i = 0; i <= ((listSlides.length)-1); i++) {
+
+            if (listSlides[i].classList.contains('is_active')) {
+
+                return i;
+                break;
+
+            }
+
+        }
+
+    }
+
+
+    // Test the end of the quizz
+    function isEnded(indexSlide, lengthSlides) {
+
+        let endQuizz = indexSlide > lengthSlides ? true : false;
         return endQuizz;
 
     }
-
-
-    // Control the answer of the user
-    function isCorrectAnswer(userResponse, quizzAnswer) {
-
-        let correctAnswer = userResponse === quizzAnswer ? true : false;
-        return correctAnswer;
-
-    }
-
-    // const quizzResponse = availableQuestions[indexQuestionnaire].réponse;
-    // const quizzAnecdote = availableQuestions[indexQuestionnaire].anecdote;
-
-    // if (isEnded(indexQuestion, availableQuestions.length)) {
-
-    //     showScores();
-
-    // } else {
-
-    // while (isEnded(indexQuestion, availableQuestions.length) == false) {
-
-    // }
-
-
-    // Control the answer of the user
-    // if (isCorrectAnswer(checkedRadioInput.value, quizzResponse)) {
-
-    //     checkedLabelInput.style.backgroundColor = 'green';
-
-    //     alert("Bonne réponse");
-
-    // } else {
-
-    //     checkedLabelInput.style.backgroundColor = 'red';
-    //     alert("Mauvaise réponse");
-    // }
-
-
-    // // Controls if the modal has finished being hidden from the user
-    // // and complete CSS transitions
-    // popupQuizz.addEventListener('hidden.bs.modal', event => {
-
-    //     // enabling information bars in the footer
-    //     popupQuizz.querySelectorAll('.bar').forEach(bar => {
-
-    //         toggleClass(bar, 'enabled');
-
-    //     });
-
-    //     // toggleClass(popupQuizz.querySelector('#quizz-zone'), 'active');
-        
-    // });
-
-
-
 
 
     /* ========================================================================== */
