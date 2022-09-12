@@ -1,6 +1,6 @@
 
 // Call the function when the whole DOM content is loaded
-// document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ========================================================================== */
@@ -540,4 +540,4 @@
 
 
 
-// });
+});
