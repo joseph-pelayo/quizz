@@ -16,56 +16,43 @@
 </head>
 <body>
   <header class="header-section">
-    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- Container wrapper -->
       <div class="container-lg">
         <a href="#" class="navbar-brand">
             <img src="./img/logo-kwiz974.png" alt="Logo site" width="20%">
         </a>
+        <!-- Toggle button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Menu wrapper -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown me-3">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Culture Générale
+                  Culture
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Culture générale</a></li>
                 <li><a class="dropdown-item" href="#">Histoire</a></li>
-                <li><a class="dropdown-item" href="#">Géographie</a></li>
-                <li><a class="dropdown-item" href="#">Sciences</a></li>
-                <li><a class="dropdown-item" href="#">Langue française</a></li>
-                <li><a class="dropdown-item" href="#">Langues étrangères</a></li>
-                <li><a class="dropdown-item" href="#">Enfants</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown me-3">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Divertissements
+                  Divertissement
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Célébrités et people</a></li>
                 <li><a class="dropdown-item" href="#">Cinéma</a></li>
-                <li><a class="dropdown-item" href="#">Dessins animés</a></li>
-                <li><a class="dropdown-item" href="#">Musique</a></li>
-                <li><a class="dropdown-item" href="#">Télévision</a></li>
-                <li><a class="dropdown-item" href="#">Jeux vidéo</a></li>
-                <li><a class="dropdown-item" href="#">Manga</a></li>
-                <li><a class="dropdown-item" href="#">Bandes dessinés</a></li>
-                <li><a class="dropdown-item" href="#">Humour</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown me-3">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Sports et loisirs
+                  Nature
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Auto-moto</a></li>
-                <li><a class="dropdown-item" href="#">Cuisine</a></li>
-                <li><a class="dropdown-item" href="#">Loisirs</a></li>
-                <li><a class="dropdown-item" href="#">Sport</a></li>
-                <li><a class="dropdown-item" href="#">Voyages</a></li>
+                <li><a class="dropdown-item" href="#">Animaux</a></li>
               </ul>
             </li>
           </ul>
@@ -75,8 +62,14 @@
   </header>
 
   <main>
-    <section class="quizz">
-      <h1>Quizz</h1>
+    <section class="quizz text-center">
+      <h1 class="text-center mt-4 mb-4">Quizz</h1>
+        <div class="btn-group mt-3 mb-5" role="group">
+            <button type="button" class="btn btn-danger">Tous</button>
+            <button type="button" class="btn btn-danger">Divertissement</button>
+            <button type="button" class="btn btn-danger">Nature</button>
+            <button type="button" class="btn btn-danger">Nature</button>
+          </div>
         <div class="container-lg">
           <div id="cards-list" class="cards-list">
             <ul id="quizz-content" class="quizz-content d-flex justify-content-center flex-wrap">
