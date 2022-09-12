@@ -1,4 +1,4 @@
-# le projet quizz de maxime et joseph
+# K'WIZ 974 - Projet de Maxime et Joseph
 
 ## installation :
 
