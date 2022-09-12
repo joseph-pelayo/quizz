@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Declaring global variables
     const jsonFilename = ["marvel","automobile","fourmis","histoire-de-france"];
-    const jsonSourcePath = "./json/"
+    const jsonSourcePath = "./assets/data/"
     let htmlCardContent = "";
 
 
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalHtmlPopup = `
             <div id="modal-popup" class="modal fade" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-modal="true" data-origin-quizz="${sourceData}" data-level-quizz="${levelQuestion}" data-volume-quizz="${volumeQuestion}">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content" style="background-image: url('../img/${nomImage}.jpg');">
+                    <div class="modal-content" style="background-image: url('./assets/img/${nomImage}.jpg');">
     
                         <!-- Modal Header -->
                         <div class="modal-header text-white position-relative">
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span>${popupInfo.domaine}</span>
                             </div>
                             <div class="modal-logo">
-                                <img class="img-fluid" src="./img/logo-kwiz974.png" alt="Logo popup">
+                                <img class="img-fluid" src="./assets/img/logo-kwiz974.png" alt="Logo popup">
                             </div>
                             <p class="text-center outflow">${popupInfo.catégorie}</p>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"</button>

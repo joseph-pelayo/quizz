@@ -46,7 +46,7 @@
     "fr": {
       "débutant": {
         "image": {
-          "source": "./img/mont-saint-michel.jpg",
+          "source": "./assets/img/mont-saint-michel.jpg",
           "filename": "mont-saint-michel",
           "alternative": "mont saint-michel"
         },
@@ -175,7 +175,7 @@
       },
       "confirmé": {
         "image": {
-          "source": "./img/notre-dame-paris.jpg",
+          "source": "./assets/img/notre-dame-paris.jpg",
           "filename": "notre-dame-paris",
           "alternative": "notre-dame-de-paris"
         },
@@ -304,7 +304,7 @@
       },
       "expert": {
         "image": {
-          "source": "./img/napoleon-soldat.jpg",
+          "source": "./assets/img/napoleon-soldat.jpg",
           "filename": "napoleon-soldat",
           "alternative": "napoleon"
         },

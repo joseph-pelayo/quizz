@@ -46,7 +46,7 @@
     "fr": {
       "débutant": {
         "image": {
-          "source": "./img/fourmi.jpg",
+          "source": "./assets/img/fourmi.jpg",
           "filename": "fourmi",
           "alternative": "ant"
         },
@@ -175,7 +175,7 @@
       },
       "confirmé": {
         "image": {
-          "source": "./img/cigale.jpg",
+          "source": "./assets/img/cigale.jpg",
           "filename": "cigale",
           "alternative": "cigale"
         },
@@ -304,7 +304,7 @@
       },
       "expert": {
         "image": {
-          "source": "./img/fourmilier.jpg",
+          "source": "./assets/img/fourmilier.jpg",
           "filename": "fourmilier",
           "alternative": "fourmilier"
         },

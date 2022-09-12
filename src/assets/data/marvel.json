@@ -46,7 +46,7 @@
     "fr": {
       "débutant": {
         "image": {
-          "source": "./img/marvel-card-1.jpg",
+          "source": "./assets/img/marvel-card-1.jpg",
           "filename": "marvel-card-1",
           "alternative": "Marvel heroes"
         },
@@ -175,7 +175,7 @@
       },
       "confirmé": {
         "image": {
-          "source": "./img/marvel-card-2.jpg",
+          "source": "./assets/img/marvel-card-2.jpg",
           "filename": "marvel-card-2",
           "alternative": "Marvel heroes"
         },
@@ -304,7 +304,7 @@
       },
       "expert": {
         "image": {
-          "source": "./img/marvel-card-3.jpg",
+          "source": "./assets/img/marvel-card-3.jpg",
           "filename": "marvel-card-3",
           "alternative": "Marvel heroes"
         },

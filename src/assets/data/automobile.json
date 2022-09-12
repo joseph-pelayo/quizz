@@ -46,7 +46,7 @@
     "fr": {
       "débutant": {
         "image": {
-          "source": "./img/nascar.jpg",
+          "source": "./assets/img/nascar.jpg",
           "filename": "nascar",
           "alternative": "nascar autocars"
         },
@@ -175,7 +175,7 @@
       },
       "confirmé": {
         "image": {
-          "source": "./img/old-car.jpg",
+          "source": "./assets/img/old-car.jpg",
           "filename": "old-car",
           "alternative": "old car"
         },
@@ -304,7 +304,7 @@
       },
       "expert": {
         "image": {
-          "source": "./img/nissan-gtr.jpg",
+          "source": "./assets/img/nissan-gtr.jpg",
           "filename": "nissan-gtr",
           "alternative": "nissan gtr"
         },
