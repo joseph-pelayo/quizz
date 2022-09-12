@@ -118,7 +118,6 @@ body {
 }
 
 .modal-header {
-    position: relative;
     border: 0;
     background-color: rgba(47, 54, 64, 0.8);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -135,8 +134,17 @@ body {
     background-color: rgba(210, 218, 226, 0.9);
 }
 
+.modal-domain {
+    margin: 17px 0;
+}
+
 .modal-logo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 64px;
+    margin: 16px 0;
     border: 2px solid #fff;
     border-radius: 50%;
 }
@@ -371,7 +379,6 @@ button#launch-btn.enabled {
 .quizz-message {
     color: #f53b57;
     font-weight: 500;
-    border: 1px solid #fff;
 }
 
 

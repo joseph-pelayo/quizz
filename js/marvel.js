@@ -11,13 +11,6 @@
     const jsonFilename = ["marvel","automobile","fourmis","histoire-de-france"];
     const jsonSourcePath = "./json/"
     let htmlCardContent = "";
-    let modalHtmlPopup = "";
-    let currentSlide;
-
-
-    // Selecting all required HTML elements
-    // const popupQuizz = document.getElementById('modal-popup');
-
 
 
     // Retrieving data for each JSON file specified in the array
@@ -67,6 +60,7 @@
 
     // Generate cards and fill data from JSON file for each card
     function generateCard(data, fileSource) {
+
 
         data.then(dataCard => {
 
@@ -133,6 +127,7 @@
     function createPopup(sourceData, levelQuestion, volumeQuestion, nomImage) {
 
         const pathSourceFile = jsonSourcePath + sourceData + '.json';
+        let modalHtmlPopup = "";
 
         getData(pathSourceFile).then(dataPopup => {
 
@@ -152,7 +147,7 @@
                     <div class="modal-content" style="background-image: url('../img/${nomImage}.jpg');">
     
                         <!-- Modal Header -->
-                        <div class="modal-header text-white">
+                        <div class="modal-header text-white position-relative">
                             <div class="modal-domain d-flex align-items-center">
                                 <i class="fa-solid fa-circle-question"></i>
                                 <span>${popupInfo.domaine}</span>
@@ -496,7 +491,7 @@
 
 
             // Display the anecdote
-            quizzMessage.textContent = quizzAnecdote;
+            // quizzMessage.textContent = quizzAnecdote;
 
 
 
