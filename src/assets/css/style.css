@@ -100,6 +100,10 @@ body {
     text-decoration: underline;
 }
 
+.card.unselected {
+    display: none;
+}
+
 
 /* Popup */
 
@@ -379,6 +383,46 @@ button#launch-btn.enabled {
 .quizz-message {
     color: #f53b57;
     font-weight: 500;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 420px) {
+    
+    body {
+        background-color: red;
+    }
+
+}
+
+@media screen and (max-width: 995px) {
+    
+    .bar {
+        margin: 4px 0;
+        border-radius: 10px;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .quizz-slider {
+        top: 510px;
+    }
+
+}
+
+@media screen and (max-width: 450px ) {
+
+    .modal-domain {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .modal-logo {
+        margin: 8px 0;
+    }
+
 }
 
 

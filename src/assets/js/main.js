@@ -22,6 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    // filtering cards through buttons group
+    const criteriaButtons = document.querySelectorAll('.quizz-criteria btn');
+    
+    criteriaButtons.forEach(elementButton => {
+
+        elementButton.addEventListener('onclick', () => {
+
+            toggleClass(elementButton, 'active');
+
+            // console.log(cardsToFilter);
+
+        });
+
+    })
 
     /* ========================================================================== */
     /* ================================ FUNCTIONS =============================== */
@@ -72,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Object.keys(levelQuizz).forEach(level => {
 
                 htmlCardContent += `
-                    <li class="card" data-card-image="${levelQuizz[level].image.filename}" data-card-source=${fileSource} data-card-level=${level} data-card-volume=${levelQuizz[level].questionnaire.length}>
+                    <li class="card" data-card-image="${levelQuizz[level].image.filename}" data-card-source=${fileSource} data-card-level=${level} data-card-volume=${levelQuizz[level].questionnaire.length} data-card-domaine=${(cardInfo.domaine).toLowerCase()} data-card-categorie=${(cardInfo.catégorie).toLowerCase()}>
                         <div class="card-img">
                             <img src="${levelQuizz[level].image.source}" class="img-fluid" alt="${levelQuizz[level].image.alternative}">
                         </div>
@@ -530,6 +544,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let endQuizz = indexSlide > lengthSlides ? true : false;
         return endQuizz;
+
+    }
+
+
+    // Display cards with some selection criteria
+    function filterCard(valueCriteria) {
+
+        // const filterButtons = document.querySelectorAll('.card');
+
+        console.log(valueCriteria);
+
+        // console.log("filtrage en cours")
+
+        // const cardsToFilter = document.querySelectorAll('.card');
+
+        // cardsToFilter.forEach(card => {
+
+        //     if ((card.cardDomaine === criteria) || (card.cardCategorie === criteria)) {
+
+        //         toggleClass(card, "unselected");
+        //     }
+
+        // })
 
     }
 

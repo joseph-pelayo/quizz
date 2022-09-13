@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS Bootstrap styling -->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../node_modules/bootstrap/dist/css/bootstrap-grid.min.css">
     <!-- CSS styling for Fontawesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <!-- Custom CSS styling -->
@@ -35,8 +35,8 @@
                   Culture
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Culture générale</a></li>
-                <li><a class="dropdown-item" href="#">Histoire</a></li>
+                <li><a class="dropdown-item" href="#" data-link-value="culture générale">Culture générale</a></li>
+                <li><a class="dropdown-item" href="#" data-link-value="histoire">Histoire</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown me-3">
@@ -44,7 +44,7 @@
                   Divertissement
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Cinéma</a></li>
+                <li><a class="dropdown-item" href="#" data-link-value="cinéma">Cinéma</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown me-3">
@@ -52,7 +52,7 @@
                   Nature
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Animaux</a></li>
+                <li><a class="dropdown-item" href="#" data-link-value="animaux">Animaux</a></li>
               </ul>
             </li>
           </ul>
@@ -64,11 +64,11 @@
   <main>
     <section class="quizz text-center">
       <h1 class="text-center mt-4 mb-4">Quizz</h1>
-        <div class="btn-group mt-3 mb-5" role="group">
-            <button type="button" class="btn btn-danger">Tous</button>
-            <button type="button" class="btn btn-danger">Divertissement</button>
-            <button type="button" class="btn btn-danger">Nature</button>
-            <button type="button" class="btn btn-danger">Nature</button>
+        <div class="btn-group mt-3 mb-5 btn-group-sm quizz-criteria" role="group">
+            <button type="button" class="btn btn-danger" value="all">Tous</button>
+            <button type="button" class="btn btn-danger" value="divertissement">Divertissement</button>
+            <button type="button" class="btn btn-danger" value="culture">Culture</button>
+            <button type="button" class="btn btn-danger" value="nature">Nature</button>
           </div>
         <div class="container-lg">
           <div id="cards-list" class="cards-list">
