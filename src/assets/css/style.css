@@ -387,14 +387,6 @@ button#launch-btn.enabled {
 
 /* MEDIA QUERIES */
 
-@media screen and (max-width: 420px) {
-    
-    body {
-        background-color: red;
-    }
-
-}
-
 @media screen and (max-width: 995px) {
     
     .bar {
